@@ -7,7 +7,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* OVERLAY AWAL */
+    /* OVERLAY PEMBUKA */
     #overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -20,11 +20,10 @@
       text-align: center;
       color: white;
       font-family: Arial, sans-serif;
-      padding: 20px;
     }
 
     .btn-buka {
-      padding: 15px 35px;
+      padding: 12px 30px;
       margin-top: 20px;
       background: white;
       color: #ff69b4;
@@ -43,7 +42,6 @@
       background-attachment: fixed;
       font-family: 'Georgia', serif;
       height: 100vh;
-      width: 100vw;
       overflow: hidden; 
       display: flex;
       justify-content: center;
@@ -64,32 +62,32 @@
       position: relative;
     }
 
-    /* PERBAIKAN UKURAN FOTO AGAR TIDAK TERLALU BESAR */
+    /* PERBAIKAN UKURAN FOTO: DIBUAT KECIL DAN PROPORSI PAS */
     .gallery {
       position: absolute;
-      top: 50%;
+      top: 45%; /* Sedikit ke atas agar tidak tertabrak teks bawah */
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 80%; /* Ukuran container lebih kecil agar cantik */
-      max-width: 350px; /* Maksimal lebar di laptop/HP besar */
-      height: 350px;
+      width: 280px; /* Lebar diperkecil agar pas di semua HP */
+      height: 380px; /* Tinggi disesuaikan */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .gallery img {
       position: absolute;
-      top: 0; left: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain; /* FOTO TIDAK TERPOTONG (Proporsional) */
-      background-color: rgba(255, 255, 255, 0.5); /* Background tipis jika foto tidak kotak */
-      border: 6px solid white;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      object-fit: contain; /* GAMBAR TIDAK TERPOTONG */
+      border: 5px solid white;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
       opacity: 0;
       animation: slideShow 12s forwards; 
     }
 
-    /* KOTAK PESAN */
+    /* KOTAK PESAN TENGAH */
     #container-pesan {
       display: none; 
       position: absolute;
@@ -97,32 +95,31 @@
       left: 50%;
       transform: translate(-50%, -50%);
       width: 85%;
-      max-width: 500px;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 30px 20px;
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      max-width: 450px;
+      background: rgba(255, 255, 255, 0.98);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       text-align: center;
       color: #d63384;
-      border-top: 5px solid #ff69b4;
+      border-top: 4px solid #ff69b4;
     }
 
     .footer-text {
-      font-size: 1rem;
+      font-size: 0.95rem;
       line-height: 1.6;
-      margin-bottom: 20px;
-      font-style: italic;
+      margin-bottom: 15px;
     }
 
     /* ANIMASI SLIDESHOW */
     @keyframes slideShow {
-      0% { opacity: 0; transform: scale(0.95); }
+      0% { opacity: 0; transform: scale(0.9); }
       10% { opacity: 1; transform: scale(1); }
       90% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 0; transform: scale(0.9); }
     }
 
-    /* Delay Sinkron Lagu (Total 204 Detik) */
+    /* URUTAN FOTO 1 - 17 (Sinkron Lagu) */
     img:nth-child(1) { animation-delay: 0s; }
     img:nth-child(2) { animation-delay: 12s; }
     img:nth-child(3) { animation-delay: 24s; }
@@ -175,7 +172,7 @@
 
     <div id="container-pesan">
       <p class="footer-text" id="typed-text"></p>
-      <p style="font-weight:bold; font-size: 1.1rem;">💖 Jangan berhenti mencintaiku 💖</p>
+      <p style="font-weight:bold; font-size: 1rem;">💖 Jangan berhenti mencintaiku 💖</p>
     </div>
   </div>
 
@@ -184,16 +181,16 @@
   </audio>
 
   <script>
-    const pesanOktavia = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
+    const pesanFinal = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
 
     function typeWriter(text, i, fnCallback) {
       if (i < text.length) {
         document.getElementById("typed-text").innerHTML = text.substring(0, i+1);
         setTimeout(function() {
           typeWriter(text, i + 1, fnCallback)
-        }, 90); 
+        }, 100); 
       } else {
-        setTimeout(fnCallback, 15000); // Pesan tampil 15 detik sebelum close
+        setTimeout(fnCallback, 15000); 
       }
     }
 
@@ -203,18 +200,18 @@
       const lagu = document.getElementById("myLagu");
       lagu.play();
 
-      // Foto selesai di detik 204
+      // Transisi dari foto ke pesan pada detik 204
       setTimeout(function() {
         document.getElementById("galeriFoto").style.display = "none";
         document.getElementById("container-pesan").style.display = "block";
         
-        typeWriter(pesanOktavia, 0, function() {
-          // Auto Close (Pindah ke Google)
+        typeWriter(pesanFinal, 0, function() {
+          // AUTO CLOSE: Mengarahkan ke Google
           window.location.href = "https://www.google.com";
         });
       }, 204000); 
 
-      // Safety Close tepat saat lagu berakhir (detik 270)
+      // Safety Auto Close di akhir lagu (detik 270)
       setTimeout(function() {
          window.location.href = "https://www.google.com";
       }, 270000);
