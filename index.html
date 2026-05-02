@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Graduation Oktavia Sidauruk</title>
     <style>
-        /* Menghilangkan scrollbar dan mengatur dasar */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            background-color: #ffe4e1;
+            /* Background diatur agar tetap terlihat dan pas di HP */
             background-image: url("anime-love-bg.jpg");
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             font-family: 'Arial', sans-serif;
             height: 100vh;
             display: flex;
@@ -25,7 +26,7 @@
         #layar-awal {
             position: fixed;
             inset: 0;
-            background: #ffb6c1;
+            background: rgba(255, 182, 193, 0.9); /* Dibuat sedikit transparan */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -33,84 +34,79 @@
             z-index: 9999;
             color: white;
             text-align: center;
-            padding: 20px;
         }
 
         .tombol {
-            padding: 15px 40px;
-            margin-top: 25px;
+            padding: 12px 35px;
+            margin-top: 20px;
             background: white;
             color: #ff69b4;
             border: none;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 1.1rem;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        /* FRAME FOTO: INI YANG MEMBUAT RAPI */
+        /* FRAME FOTO: Transparan dan Rapi */
         .wrapper {
             display: none;
-            width: 90%;
-            max-width: 320px; /* Ukuran frame dibatasi agar tidak besar */
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            width: 80%; /* Tidak menutupi seluruh lebar HP */
+            max-width: 280px;
+            background: rgba(255, 255, 255, 0.85); /* Putih transparan agar background terlihat */
+            padding: 10px 10px 30px 10px;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             text-align: center;
+            backdrop-filter: blur(5px); /* Efek blur pada background di belakang foto */
         }
 
         .wrapper img {
-            width: 100%; /* Foto mengikuti lebar frame */
-            height: auto; /* Tinggi mengikuti proporsi asli foto */
-            max-height: 60vh; /* Tapi tidak boleh lebih dari 60% tinggi layar */
-            display: none;
-            border-radius: 5px;
+            width: 100%;
+            height: auto;
+            max-height: 350px;
             object-fit: contain;
-            border: 1px solid #f0f0f0;
+            display: none;
+            border-radius: 4px;
         }
 
         /* KOTAK PESAN */
         #kotak-pesan {
             display: none;
             width: 85%;
-            max-width: 400px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px 20px;
-            border-radius: 20px;
+            max-width: 350px;
+            background: rgba(255, 255, 255, 0.9); /* Transparan */
+            padding: 20px;
+            border-radius: 15px;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border: 2px solid #ffb6c1;
+            backdrop-filter: blur(5px);
         }
 
         #teks-jalan {
             color: #d63384;
-            font-size: 1.05rem;
-            line-height: 1.6;
-            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.5;
+            font-weight: 500;
         }
 
-        /* Animasi */
-        .muncul { animation: fade 1s ease-in forwards; }
-        @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+        .fade { animation: fadeEffect 0.8s; }
+        @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }
     </style>
 </head>
 <body>
 
     <div id="layar-awal">
-        <h1>Khusus Untuk Oktavia Sidauruk ❤️</h1>
-        <button class="tombol" onclick="mulai()">BUKA PESAN</button>
+        <h2 style="padding: 0 20px;">Klik untuk Oktavia Sidauruk ❤️</h2>
+        <button class="tombol" onclick="mulai()">BUKA</button>
     </div>
 
     <div class="wrapper" id="frame">
-        <!-- List Foto 1-17 -->
         <img src="foto1.jpeg" class="slide">
         <img src="foto2.jpeg" class="slide">
         <img src="foto3.jpeg" class="slide">
         <img src="foto4.jpeg" class="slide">
         <img src="foto5.jpeg" class="slide">
-        <img src="foto6.slide"> <!-- typo fix: class="slide" -->
         <img src="foto6.jpeg" class="slide">
         <img src="foto7.jpeg" class="slide">
         <img src="foto8.jpeg" class="slide">
@@ -123,65 +119,57 @@
         <img src="foto15.jpeg" class="slide">
         <img src="foto16.jpeg" class="slide">
         <img src="foto17.jpeg" class="slide">
-        
-        <p style="margin-top:15px; color:#ff69b4; font-weight:bold; font-size:0.9rem;">Special Day ✨</p>
+        <p style="margin-top:10px; color: #ff69b4; font-size: 0.8rem; font-weight: bold;">Graduation Day ✨</p>
     </div>
 
     <div id="kotak-pesan">
         <p id="teks-jalan"></p>
-        <p style="margin-top:20px; font-weight:bold; color:#ff69b4;">Graduation Day 🎓</p>
     </div>
 
     <audio id="musik" src="TitiDj-JanganBerhentiMencintaiku.mp3"></audio>
 
     <script>
-        const pesanCinta = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
-        let no = 0;
+        const pesan = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
+        let n = 0;
         const slides = document.querySelectorAll(".slide");
 
         function mulai() {
             document.getElementById("layar-awal").style.display = "none";
             document.getElementById("frame").style.display = "block";
             document.getElementById("musik").play();
-            putarSlide();
+            tampilFoto();
         }
 
-        function putarSlide() {
-            if (no < slides.length) {
+        function tampilFoto() {
+            if (n < slides.length) {
                 slides.forEach(s => s.style.display = "none");
-                slides[no].style.display = "block";
-                slides[no].classList.add("muncul");
-                no++;
-                setTimeout(putarSlide, 10000); // 10 detik per foto
+                slides[n].style.display = "block";
+                slides[n].classList.add("fade");
+                n++;
+                setTimeout(tampilFoto, 10000); 
             } else {
                 document.getElementById("frame").style.display = "none";
                 document.getElementById("kotak-pesan").style.display = "block";
-                mulaiKetik();
+                ketik();
             }
         }
 
-        function mulaiKetik() {
-            let i = 0;
-            const element = document.getElementById("teks-jalan");
-            function jalan() {
-                if (i < pesanCinta.length) {
-                    element.innerHTML += pesanCinta.charAt(i);
-                    i++;
-                    setTimeout(jalan, 75);
-                } else {
-                    // Setelah teks selesai, tunggu 15 detik lalu AUTO CLOSE ke Google
-                    setTimeout(() => {
-                        window.location.href = "https://www.google.com";
-                    }, 15000);
-                }
+        let i = 0;
+        function ketik() {
+            if (i < pesan.length) {
+                document.getElementById("teks-jalan").innerHTML += pesan.charAt(i);
+                i++;
+                setTimeout(ketik, 80);
+            } else {
+                setTimeout(tutup, 15000);
             }
-            jalan();
         }
 
-        // Safety Close jika lagu selesai (detik ke-270)
-        setTimeout(() => {
+        function tutup() {
             window.location.href = "https://www.google.com";
-        }, 270000);
+        }
+
+        setTimeout(tutup, 270000);
     </script>
 </body>
 </html>
