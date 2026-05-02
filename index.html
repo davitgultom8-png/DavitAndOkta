@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Graduation Oktavia</title>
+  <title>Happy Graduation Oktavia Sidauruk</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    /* LAYAR PEMBUKA */
     #overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -18,7 +19,7 @@
       flex-direction: column;
       text-align: center;
       color: white;
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
     }
 
     .btn-buka {
@@ -33,6 +34,7 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
+    /* BACKGROUND UTAMA */
     body {
       background-image: url("anime-love-bg.jpg"); 
       background-size: cover;
@@ -60,6 +62,7 @@
       position: relative;
     }
 
+    /* GALERI FOTO DI TENGAH */
     .gallery {
       position: absolute;
       top: 50%;
@@ -80,9 +83,10 @@
       border-radius: 15px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       opacity: 0;
-      animation: slideShow 12s forwards; /* Durasi tiap foto diperlama agar sinkron lagu */
+      animation: slideShow 12s forwards; /* 12 detik per foto agar pas dengan lagu */
     }
 
+    /* PESAN DI TENGAH */
     #container-pesan {
       display: none; 
       position: absolute;
@@ -92,7 +96,7 @@
       width: 90%;
       max-width: 550px;
       background: rgba(255, 255, 255, 0.95);
-      padding: 30px;
+      padding: 35px 25px;
       border-radius: 20px;
       box-shadow: 0 15px 50px rgba(0,0,0,0.15);
       text-align: center;
@@ -101,12 +105,12 @@
     }
 
     .footer-text {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       line-height: 1.8;
       margin-bottom: 20px;
     }
 
-    /* Animasi Slide Show (17 foto x 12 detik = 204 detik total) */
+    /* ANIMASI */
     @keyframes slideShow {
       0% { opacity: 0; transform: scale(0.9); }
       10% { opacity: 1; transform: scale(1); }
@@ -114,7 +118,7 @@
       100% { opacity: 0; transform: scale(0.9); }
     }
 
-    /* Delay sinkronisasi agar pas dengan lagu Titi DJ yang panjang */
+    /* SINKRONISASI 17 FOTO (Total 204 Detik) */
     img:nth-child(1) { animation-delay: 0s; }
     img:nth-child(2) { animation-delay: 12s; }
     img:nth-child(3) { animation-delay: 24s; }
@@ -167,7 +171,7 @@
 
     <div id="container-pesan">
       <p class="footer-text" id="typed-text"></p>
-      <p style="font-weight:bold">💖 Jangan berhenti mencintaiku 💖</p>
+      <p style="font-weight:bold; font-size: 1.2rem;">💖 Jangan berhenti mencintaiku 💖</p>
     </div>
   </div>
 
@@ -176,7 +180,7 @@
   </audio>
 
   <script>
-    const pesanBaru = "Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.";
+    const pesanRequest = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
 
     function typeWriter(text, i, fnCallback) {
       if (i < text.length) {
@@ -185,10 +189,8 @@
           typeWriter(text, i + 1, fnCallback)
         }, 100);
       } else {
-        // Durasi total lagu sekitar 270 detik (4:30). 
-        // Foto habis di detik ke-204 + ngetik pesan. 
-        // Sisa waktu akan digunakan untuk memajang pesan sebelum close.
-        setTimeout(fnCallback, 15000); 
+        // Tunggu sisa lagu sebelum auto close
+        setTimeout(fnCallback, 25000); 
       }
     }
 
@@ -198,18 +200,18 @@
       const lagu = document.getElementById("myLagu");
       lagu.play();
 
-      // Foto selesai di detik 204, lalu ganti ke teks
+      // Foto selesai di detik 204
       setTimeout(function() {
         document.getElementById("galeriFoto").style.display = "none";
         document.getElementById("container-pesan").style.display = "block";
         
-        typeWriter(pesanBaru, 0, function() {
-          // Otomatis pindah halaman saat lagu habis
+        typeWriter(pesanRequest, 0, function() {
+          // Auto close/pindah halaman ke Google saat lagu benar-benar selesai
           window.location.href = "https://www.google.com";
         });
       }, 204000); 
 
-      // Keamanan cadangan: Paksa tutup/pindah jika lagu mencapai 270 detik
+      // Safety timer: Tutup web otomatis di detik 270 (durasi total lagu)
       setTimeout(function() {
          window.location.href = "https://www.google.com";
       }, 270000);
