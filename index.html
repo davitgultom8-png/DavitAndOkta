@@ -22,7 +22,11 @@
       color: white;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-
+    #overlay h1 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
     .btn-buka {
       padding: 15px 30px;
       margin-top: 20px;
@@ -35,10 +39,11 @@
       cursor: pointer;
       transition: 0.3s;
     }
+    .btn-buka:hover { background: #ffe4f1; }
 
     /* BACKGROUND UTAMA */
     body {
-      background-image: url("anime-love-bg.jpg"); 
+      background-image: url("images/anime-love-bg.jpg"); 
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -48,19 +53,16 @@
       min-height: 100vh;
       color: #d63384;
     }
-
     .bg-filter {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(255, 255, 255, 0.5);
       z-index: -1;
     }
-
     .content {
       display: none;
       padding: 40px 15px;
     }
-
     h1 {
       font-size: 2rem;
       text-shadow: 2px 2px 5px white;
@@ -75,7 +77,6 @@
       width: 100%;
       max-width: 500px;
     }
-
     .gallery img {
       position: absolute;
       left: 50%;
@@ -90,7 +91,7 @@
       animation: slideShow 7s forwards;
     }
 
-    /* PESAN UTAMA (DI TENGAH) */
+    /* PESAN UTAMA */
     .pesan-tengah {
       opacity: 0;
       margin: 40px auto;
@@ -100,12 +101,11 @@
       max-width: 600px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.1);
       animation: fadeIn 3s forwards;
-      animation-delay: 120s; /* Muncul setelah foto selesai */
+      animation-delay: 120s; /* muncul setelah foto selesai */
       line-height: 1.8;
       font-size: 1.1rem;
       border-left: 5px solid #ff69b4;
     }
-
     .signature {
       margin-top: 25px;
       font-weight: bold;
@@ -113,106 +113,60 @@
     }
 
     /* ANIMASI */
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-    @keyframes slideShow {
-      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
-      15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-      85% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: translateY(20px); } 
+      to { opacity: 1; transform: translateY(0); } 
     }
-
-    /* Delay Otomatis untuk 17 Foto */
-    img:nth-child(1) { animation-delay: 1s; }
-    img:nth-child(2) { animation-delay: 8s; }
-    img:nth-child(3) { animation-delay: 15s; }
-    img:nth-child(4) { animation-delay: 22s; }
-    img:nth-child(5) { animation-delay: 29s; }
-    img:nth-child(6) { animation-delay: 36s; }
-    img:nth-child(7) { animation-delay: 43s; }
-    img:nth-child(8) { animation-delay: 50s; }
-    img:nth-child(9) { animation-delay: 57s; }
-    img:nth-child(10) { animation-delay: 64s; }
-    img:nth-child(11) { animation-delay: 71s; }
-    img:nth-child(12) { animation-delay: 78s; }
-    img:nth-child(13) { animation-delay: 85s; }
-    img:nth-child(14) { animation-delay: 92s; }
-    img:nth-child(15) { animation-delay: 99s; }
-    img:nth-child(16) { animation-delay: 106s; }
-    img:nth-child(17) { animation-delay: 113s; }
-
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
   </style>
 </head>
 <body>
-
-  <!-- Layar Pembuka -->
+  <!-- LAYAR PEMBUKA -->
   <div id="overlay" onclick="mulai()">
-    <h2>Hallo Sayang, Ada Pesan Untukmu ❤️</h2>
-    <button class="btn-buka">BUKA SEKARANG</button>
+    <h1>Klik untuk pesan spesial dari seseorang yang selalu bangga padamu ❤️</h1>
+    <button class="btn-buka">Buka</button>
   </div>
 
   <div class="bg-filter"></div>
 
-  <div class="content" id="mainContent">
-    <h1>💖 Happy Graduation Sayang 💖</h1>
-    
+  <!-- KONTEN UTAMA -->
+  <div class="content">
+    <h1>Selamat Wisuda Sayang</h1>
     <div class="gallery">
-      <!-- Upload foto-fotomu ke GitHub dengan nama yang sesuai -->
-      <img src="foto1.jpeg" alt="1">
-      <img src="foto2.jpeg" alt="2">
-      <img src="foto3.jpeg" alt="3">
-      <img src="foto4.jpeg" alt="4">
-      <img src="foto5.jpeg" alt="5">
-      <img src="foto6.jpeg" alt="6">
-      <img src="foto7.jpeg" alt="7">
-      <img src="foto8.jpeg" alt="8">
-      <img src="foto9.jpeg" alt="9">
-      <img src="foto10.jpeg" alt="10">
-      <img src="foto11.jpeg" alt="11">
-      <img src="foto12.jpeg" alt="12">
-      <img src="foto13.jpeg" alt="13">
-      <img src="foto14.jpeg" alt="14">
-      <img src="foto15.jpeg" alt="15">
-      <img src="foto16.jpeg" alt="16">
-      <img src="foto17.jpeg" alt="17">
+      <!-- Foto-foto dimasukkan di sini -->
     </div>
-
-    <!-- PESAN DI TENGAH -->
-    <div class="pesan-tengah">
-      <p id="typed-text"></p>
-      <p class="signature">💖 Jangan berhenti mencintaiku 💖</p>
+    <div class="pesan-tengah" id="pesan">
+      Jangan berhenti mencintaiku dan jangan berubah sampai kapanpun
+      <div class="signature">❤️ Dari seseorang yang bangga padamu ❤️</div>
     </div>
   </div>
 
-  <!-- Musik -->
-  <audio id="myLagu" loop>
-    <source src="TitiDj-JanganBerhentiMencintaiku.mp3" type="audio/mpeg">
-  </audio>
+  <!-- MUSIK -->
+  <audio id="musik" src="musik/musik/TitiDj-JanganBerhentiMencintaiku.mp3" autoplay hidden></audio>
 
   <script>
-    const pesan = "Sayang, aku tahu perjalananmu tidak mudah sampai di titik ini. Banyak lelah, air mata, dan perjuangan yang kamu lewati dengan penuh kesabaran. Hari ini, melihatmu berdiri dengan bangga di hari wisuda, hatiku benar-benar terharu. Aku bangga padamu, pada setiap usaha yang tidak pernah kamu sia-siakan. Semoga ilmu yang kamu dapat menjadi berkah dan membawa kebaikan bagi banyak orang. Teruslah menjadi perawat yang penuh kasih, karena hatimu memang diciptakan untuk merawat. Aku akan selalu ada, mendukung setiap langkahmu. Selamat wisuda, cintaku.";
-
-    function typeWriter(text, i, fnCallback) {
-      if (i < text.length) {
-        document.getElementById("typed-text").innerHTML = text.substring(0, i+1) +'<span aria-hidden="true"></span>';
-        setTimeout(function() {
-          typeWriter(text, i + 1, fnCallback)
-        }, 100);
-      }
-    }
-
     function mulai() {
       document.getElementById("overlay").style.display = "none";
-      document.getElementById("mainContent").style.display = "block";
-      var lagu = document.getElementById("myLagu");
-      lagu.play();
+      document.querySelector(".content").style.display = "block";
 
-      // Mulai mengetik pesan otomatis setelah slide foto selesai (detik ke-120)
-      setTimeout(function() {
-        typeWriter(pesan, 0);
-      }, 120000); 
+      const musik = document.getElementById("musik");
+      const pesan = document.getElementById("pesan");
+
+      musik.onloadedmetadata = () => {
+        const durasi = musik.duration * 1000;
+
+        // Fade-out pesan menjelang akhir lagu (10 detik terakhir)
+        setTimeout(() => {
+          pesan.style.animation = "fadeOut 10s forwards";
+        }, durasi - 10000);
+
+        // Tutup halaman setelah lagu selesai
+        setTimeout(() => { window.close(); }, durasi);
+      };
     }
   </script>
-
 </body>
 </html>
