@@ -1,230 +1,185 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Graduation Oktavia Sidauruk</title>
-  <style>
-    /* RESET DASAR */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Graduation Oktavia Sidauruk</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      background-image: url("anime-love-bg.jpg"); 
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #fce4ec;
-    }
+        body {
+            background-color: #ffe4e1;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    /* FILTER AGAR BG TIDAK TERLALU TERANG */
-    .bg-filter {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.2);
-      z-index: -1;
-    }
+        /* LAYAR AWAL */
+        #layar-awal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffb6c1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: white;
+            text-align: center;
+        }
 
-    /* TOMBOL START */
-    #overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: #ffb6c1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      text-align: center;
-      color: white;
-    }
+        .tombol {
+            padding: 15px 30px;
+            margin-top: 20px;
+            background: white;
+            color: #ff69b4;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
 
-    .btn-buka {
-      padding: 15px 30px;
-      margin-top: 20px;
-      background: white;
-      color: #d81b60;
-      border: none;
-      border-radius: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
+        /* FRAME FOTO (UKURAN RAPI & TETAP) */
+        .container {
+            display: none;
+            position: relative;
+            width: 300px; /* Ukuran lebar dikunci agar tidak besar */
+            height: 400px;
+            background: white;
+            padding: 15px 15px 60px 15px; /* Memberi jarak bawah seperti Polaroid */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
 
-    /* CONTAINER UTAMA */
-    #mainContent {
-      display: none;
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
+        .container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* FOTO DIJAMIN TIDAK TERPOTONG / PECAH */
+            display: none;
+            border: 1px solid #eee;
+        }
 
-    /* UKURAN FOTO: DIKUNCI AGAR RAPI (TIDAK BESAR) */
-    .photo-frame {
-      position: absolute;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 250px; /* Lebar kecil yang elegan */
-      height: auto;
-      min-height: 350px;
-      background: white;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
+        /* KOTAK PESAN */
+        #kotak-pesan {
+            display: none;
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
 
-    .photo-frame img {
-      width: 100%;
-      height: 350px;
-      object-fit: contain; /* FOTO DIJAMIN TIDAK TERPOTONG */
-      opacity: 0;
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: calc(100% - 20px);
-      animation: fadeSlide 12s forwards;
-    }
+        #teks-jalan {
+            color: #d63384;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
 
-    /* KOTAK TEKS */
-    #text-box {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 85%;
-      max-width: 400px;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 25px;
-      border-radius: 15px;
-      text-align: center;
-      color: #c2185b;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      border: 2px solid #f8bbd0;
-    }
+        /* ANIMASI */
+        .fade-in { animation: fadeIn 1s ease-in forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    .typing {
-      font-size: 1rem;
-      line-height: 1.6;
-      font-style: italic;
-    }
-
-    /* ANIMASI */
-    @keyframes fadeSlide {
-      0% { opacity: 0; transform: scale(0.9); }
-      10% { opacity: 1; transform: scale(1); }
-      90% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(0.9); }
-    }
-
-    /* DELAY FOTO 1 - 17 */
-    img:nth-child(1) { animation-delay: 0s; }
-    img:nth-child(2) { animation-delay: 12s; }
-    img:nth-child(3) { animation-delay: 24s; }
-    img:nth-child(4) { animation-delay: 36s; }
-    img:nth-child(5) { animation-delay: 48s; }
-    img:nth-child(6) { animation-delay: 60s; }
-    img:nth-child(7) { animation-delay: 72s; }
-    img:nth-child(8) { animation-delay: 84s; }
-    img:nth-child(9) { animation-delay: 96s; }
-    img:nth-child(10) { animation-delay: 108s; }
-    img:nth-child(11) { animation-delay: 120s; }
-    img:nth-child(12) { animation-delay: 132s; }
-    img:nth-child(13) { animation-delay: 144s; }
-    img:nth-child(14) { animation-delay: 156s; }
-    img:nth-child(15) { animation-delay: 168s; }
-    img:nth-child(16) { animation-delay: 180s; }
-    img:nth-child(17) { animation-delay: 192s; }
-
-  </style>
+    </style>
 </head>
 <body>
 
-  <div id="overlay">
-    <h2>Special for Oktavia Sidauruk ❤️</h2>
-    <button class="btn-buka" onclick="startApp()">Klik untuk Memulai</button>
-  </div>
-
-  <div class="bg-filter"></div>
-
-  <div id="mainContent">
-    <div class="photo-frame" id="frame">
-      <img src="foto1.jpeg">
-      <img src="foto2.jpeg">
-      <img src="foto3.jpeg">
-      <img src="foto4.jpeg">
-      <img src="foto5.jpeg">
-      <img src="foto6.jpeg">
-      <img src="foto7.jpeg">
-      <img src="foto8.jpeg">
-      <img src="foto9.jpeg">
-      <img src="foto10.jpeg">
-      <img src="foto11.jpeg">
-      <img src="foto12.jpeg">
-      <img src="foto13.jpeg">
-      <img src="foto14.jpeg">
-      <img src="foto15.jpeg">
-      <img src="foto16.jpeg">
-      <img src="foto17.jpeg">
+    <div id="layar-awal">
+        <h1>Untuk Oktavia Sidauruk ❤️</h1>
+        <button class="tombol" onclick="mulaiKejutan()">Buka Sekarang</button>
     </div>
 
-    <div id="text-box">
-      <p class="typing" id="typed"></p>
-      <p style="margin-top:20px; font-weight:bold;">💖 Teruslah Bersinar 💖</p>
+    <div class="container" id="frame-foto">
+        <img src="foto1.jpeg" class="slides">
+        <img src="foto2.jpeg" class="slides">
+        <img src="foto3.jpeg" class="slides">
+        <img src="foto4.jpeg" class="slides">
+        <img src="foto5.jpeg" class="slides">
+        <img src="foto6.jpeg" class="slides">
+        <img src="foto7.jpeg" class="slides">
+        <img src="foto8.jpeg" class="slides">
+        <img src="foto9.jpeg" class="slides">
+        <img src="foto10.jpeg" class="slides">
+        <img src="foto11.jpeg" class="slides">
+        <img src="foto12.jpeg" class="slides">
+        <img src="foto13.jpeg" class="slides">
+        <img src="foto14.jpeg" class="slides">
+        <img src="foto15.jpeg" class="slides">
+        <img src="foto16.jpeg" class="slides">
+        <img src="foto17.jpeg" class="slides">
     </div>
-  </div>
 
-  <audio id="lagu" src="TitiDj-JanganBerhentiMencintaiku.mp3"></audio>
+    <div id="kotak-pesan">
+        <p id="teks-jalan"></p>
+        <p style="margin-top:20px; font-weight:bold; color:#ff69b4;">❤️ Happy Graduation ❤️</p>
+    </div>
 
-  <script>
-    const pesan = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
+    <audio id="musik" src="TitiDj-JanganBerhentiMencintaiku.mp3"></audio>
 
-    function startApp() {
-      document.getElementById("overlay").style.display = "none";
-      document.getElementById("mainContent").style.display = "block";
-      const audio = document.getElementById("lagu");
-      audio.play();
+    <script>
+        const pesan = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
+        let indexFoto = 0;
+        const slides = document.getElementsByClassName("slides");
 
-      // Durasi total slideshow foto (17 foto x 12 detik = 204 detik)
-      setTimeout(() => {
-        document.getElementById("frame").style.display = "none";
-        document.getElementById("text-box").style.display = "block";
-        startTyping();
-      }, 204000); 
-    }
-
-    function startTyping() {
-      let i = 0;
-      const speed = 100;
-      const target = document.getElementById("typed");
-
-      function type() {
-        if (i < pesan.length) {
-          target.innerHTML += pesan.charAt(i);
-          i++;
-          setTimeout(type, speed);
-        } else {
-          // Tunggu 10 detik setelah teks selesai diketik, lalu auto close
-          setTimeout(autoClose, 10000);
+        function mulaiKejutan() {
+            document.getElementById("layar-awal").style.display = "none";
+            document.getElementById("frame-foto").style.display = "block";
+            document.getElementById("musik").play();
+            tampilkanSlides();
         }
-      }
-      type();
-    }
 
-    function autoClose() {
-      // Mengalihkan ke Google sebagai pengganti window.close() yang diblokir browser modern
-      window.location.href = "https://www.google.com";
-    }
+        function tampilkanSlides() {
+            if (indexFoto < slides.length) {
+                // Sembunyikan foto sebelumnya
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+                // Tampilkan foto sekarang
+                slides[indexFoto].style.display = "block";
+                slides[indexFoto].classList.add("fade-in");
+                indexFoto++;
+                
+                // Ganti foto setiap 12 detik agar pas dengan lagu (total 17 foto)
+                setTimeout(tampilkanSlides, 12000);
+            } else {
+                // Selesai semua foto, tampilkan pesan teks
+                document.getElementById("frame-foto").style.display = "none";
+                document.getElementById("kotak-pesan").style.display = "block";
+                ketikPesan();
+            }
+        }
 
-    // Safety timer: Tutup paksa di menit ke 4.5 (durasi lagu)
-    setTimeout(autoClose, 270000);
-  </script>
+        function ketikPesan() {
+            let i = 0;
+            const target = document.getElementById("teks-jalan");
+            function ketik() {
+                if (i < pesan.length) {
+                    target.innerHTML += pesan.charAt(i);
+                    i++;
+                    setTimeout(ketik, 80);
+                } else {
+                    // Setelah teks selesai, tunggu 15 detik lalu auto-close
+                    setTimeout(tutupWeb, 15000);
+                }
+            }
+            ketik();
+        }
+
+        function tutupWeb() {
+            // Karena browser modern memblokir window.close(), kita arahkan ke Google
+            window.location.href = "https://www.google.com";
+        }
+
+        // Safety Timer: Jika lagu habis (270 detik), web otomatis close
+        setTimeout(tutupWeb, 270000);
+
+    </script>
 </body>
 </html>
