@@ -43,7 +43,7 @@
 
     /* BACKGROUND UTAMA */
     body {
-      background-image: url("images/anime-love-bg.jpg"); 
+      background-image: url("anime-love-bg.jpg"); 
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -70,103 +70,4 @@
     }
 
     /* GALLERY SLIDESHOW */
-    .gallery {
-      position: relative;
-      margin: 20px auto;
-      height: 400px;
-      width: 100%;
-      max-width: 500px;
-    }
-    .gallery img {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      max-width: 90%;
-      max-height: 350px;
-      border: 10px solid white;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      opacity: 0;
-      animation: slideShow 7s forwards;
-    }
-
-    /* PESAN UTAMA */
-    .pesan-tengah {
-      opacity: 0;
-      margin: 40px auto;
-      padding: 25px;
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 25px;
-      max-width: 600px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      animation: fadeIn 3s forwards;
-      animation-delay: 120s; /* muncul setelah foto selesai */
-      line-height: 1.8;
-      font-size: 1.1rem;
-      border-left: 5px solid #ff69b4;
-    }
-    .signature {
-      margin-top: 25px;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-
-    /* ANIMASI */
-    @keyframes fadeIn { 
-      from { opacity: 0; transform: translateY(20px); } 
-      to { opacity: 1; transform: translateY(0); } 
-    }
-    @keyframes fadeOut {
-      from { opacity: 1; }
-      to { opacity: 0; }
-    }
-  </style>
-</head>
-<body>
-  <!-- LAYAR PEMBUKA -->
-  <div id="overlay" onclick="mulai()">
-    <h1>Klik untuk pesan spesial dari seseorang yang selalu bangga padamu ❤️</h1>
-    <button class="btn-buka">Buka</button>
-  </div>
-
-  <div class="bg-filter"></div>
-
-  <!-- KONTEN UTAMA -->
-  <div class="content">
-    <h1>Selamat Wisuda Sayang</h1>
-    <div class="gallery">
-      <!-- Foto-foto dimasukkan di sini -->
-    </div>
-    <div class="pesan-tengah" id="pesan">
-      Jangan berhenti mencintaiku dan jangan berubah sampai kapanpun
-      <div class="signature">❤️ Dari seseorang yang bangga padamu ❤️</div>
-    </div>
-  </div>
-
-  <!-- MUSIK -->
-  <audio id="musik" src="musik/musik/TitiDj-JanganBerhentiMencintaiku.mp3" autoplay hidden></audio>
-
-  <script>
-    function mulai() {
-      document.getElementById("overlay").style.display = "none";
-      document.querySelector(".content").style.display = "block";
-
-      const musik = document.getElementById("musik");
-      const pesan = document.getElementById("pesan");
-
-      musik.onloadedmetadata = () => {
-        const durasi = musik.duration * 1000;
-
-        // Fade-out pesan menjelang akhir lagu (10 detik terakhir)
-        setTimeout(() => {
-          pesan.style.animation = "fadeOut 10s forwards";
-        }, durasi - 10000);
-
-        // Tutup halaman setelah lagu selesai
-        setTimeout(() => { window.close(); }, durasi);
-      };
-    }
-  </script>
-</body>
-</html>
+    .gallery
