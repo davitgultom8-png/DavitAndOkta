@@ -7,7 +7,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* LAYAR PEMBUKA */
+    /* OVERLAY AWAL */
     #overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -34,7 +34,7 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
-    /* BACKGROUND UTAMA */
+    /* BACKGROUND & LAYOUT */
     body {
       background-image: url("anime-love-bg.jpg"); 
       background-size: cover;
@@ -62,7 +62,7 @@
       position: relative;
     }
 
-    /* GALERI FOTO DI TENGAH */
+    /* GALERI FOTO TENGAH */
     .gallery {
       position: absolute;
       top: 50%;
@@ -83,10 +83,10 @@
       border-radius: 15px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       opacity: 0;
-      animation: slideShow 12s forwards; /* 12 detik per foto agar pas dengan lagu */
+      animation: slideShow 12s forwards; 
     }
 
-    /* PESAN DI TENGAH */
+    /* KOTAK PESAN KHUSUS OKTAVIA */
     #container-pesan {
       display: none; 
       position: absolute;
@@ -108,9 +108,10 @@
       font-size: 1.15rem;
       line-height: 1.8;
       margin-bottom: 20px;
+      font-style: italic;
     }
 
-    /* ANIMASI */
+    /* ANIMASI SLIDESHOW */
     @keyframes slideShow {
       0% { opacity: 0; transform: scale(0.9); }
       10% { opacity: 1; transform: scale(1); }
@@ -118,7 +119,7 @@
       100% { opacity: 0; transform: scale(0.9); }
     }
 
-    /* SINKRONISASI 17 FOTO (Total 204 Detik) */
+    /* Delay 17 Foto (Total durasi 204 detik) */
     img:nth-child(1) { animation-delay: 0s; }
     img:nth-child(2) { animation-delay: 12s; }
     img:nth-child(3) { animation-delay: 24s; }
@@ -142,7 +143,7 @@
 <body>
 
   <div id="overlay" onclick="mulai()">
-    <h2>Hallo Sayang, Ada Pesan Untukmu ❤️</h2>
+    <h2>Klik Untuk Kejutan Spesial Oktavia ❤️</h2>
     <button class="btn-buka">BUKA SEKARANG</button>
   </div>
 
@@ -180,17 +181,18 @@
   </audio>
 
   <script>
-    const pesanRequest = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
+    // Pesan yang Anda berikan
+    const pesanFinal = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
 
     function typeWriter(text, i, fnCallback) {
       if (i < text.length) {
         document.getElementById("typed-text").innerHTML = text.substring(0, i+1);
         setTimeout(function() {
           typeWriter(text, i + 1, fnCallback)
-        }, 100);
+        }, 100); 
       } else {
-        // Tunggu sisa lagu sebelum auto close
-        setTimeout(fnCallback, 25000); 
+        // Setelah selesai mengetik, tunggu sebentar lalu close/pindah halaman
+        setTimeout(fnCallback, 20000); 
       }
     }
 
@@ -200,18 +202,18 @@
       const lagu = document.getElementById("myLagu");
       lagu.play();
 
-      // Foto selesai di detik 204
+      // Durasi slideshow 17 foto x 12 detik = 204 detik
       setTimeout(function() {
         document.getElementById("galeriFoto").style.display = "none";
         document.getElementById("container-pesan").style.display = "block";
         
-        typeWriter(pesanRequest, 0, function() {
-          // Auto close/pindah halaman ke Google saat lagu benar-benar selesai
+        typeWriter(pesanFinal, 0, function() {
+          // Auto Close (Pindah ke Google) setelah lagu/pesan selesai
           window.location.href = "https://www.google.com";
         });
       }, 204000); 
 
-      // Safety timer: Tutup web otomatis di detik 270 (durasi total lagu)
+      // Safety Auto Close pada detik ke-270 (akhir lagu)
       setTimeout(function() {
          window.location.href = "https://www.google.com";
       }, 270000);
