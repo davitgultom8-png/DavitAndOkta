@@ -15,24 +15,25 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 100;
+      z-index: 1000;
       cursor: pointer;
       flex-direction: column;
       text-align: center;
       color: white;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    #overlay h2 { margin-bottom: 20px; font-size: 24px; }
-    
     .btn-buka {
       padding: 15px 30px;
+      margin-top: 20px;
       background: white;
       color: #ff69b4;
       border-radius: 50px;
       font-weight: bold;
       border: none;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: 0.3s;
     }
 
     /* BACKGROUND UTAMA */
@@ -41,7 +42,7 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Georgia', serif;
       text-align: center;
       overflow-x: hidden;
       min-height: 100vh;
@@ -51,18 +52,18 @@
     .bg-filter {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.5);
       z-index: -1;
     }
 
     .content {
       display: none;
-      padding: 40px 20px;
+      padding: 40px 15px;
     }
 
     h1 {
+      font-size: 2rem;
       text-shadow: 2px 2px 5px white;
-      animation: fadeIn 2s ease-in;
       margin-bottom: 20px;
     }
 
@@ -70,9 +71,9 @@
     .gallery {
       position: relative;
       margin: 20px auto;
-      height: 450px;
+      height: 400px;
       width: 100%;
-      max-width: 600px;
+      max-width: 500px;
     }
 
     .gallery img {
@@ -81,42 +82,38 @@
       top: 50%;
       transform: translate(-50%, -50%) scale(0.8);
       max-width: 90%;
-      max-height: 400px;
-      border: 8px solid white;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      max-height: 350px;
+      border: 10px solid white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       opacity: 0;
-      animation: slideShow 8s forwards;
+      animation: slideShow 7s forwards;
     }
 
-    /* PESAN PANJANG DI AKHIR */
-    .footer-container {
-      margin-top: 30px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 20px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
+    /* PESAN UTAMA (DI TENGAH) */
+    .pesan-tengah {
       opacity: 0;
-      animation: fadeIn 4s forwards;
-      animation-delay: 137s; /* Muncul setelah semua foto selesai */
-    }
-
-    .footer-text {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      font-style: italic;
-      margin-bottom: 15px;
+      margin: 40px auto;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 25px;
+      max-width: 600px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      animation: fadeIn 3s forwards;
+      animation-delay: 120s; /* Muncul setelah foto selesai */
+      line-height: 1.8;
+      font-size: 1.1rem;
+      border-left: 5px solid #ff69b4;
     }
 
     .signature {
+      margin-top: 25px;
       font-weight: bold;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
 
     /* ANIMASI */
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
     @keyframes slideShow {
       0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
@@ -125,24 +122,24 @@
       100% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
     }
 
-    /* Delay Animasi Foto */
+    /* Delay Otomatis untuk 17 Foto */
     img:nth-child(1) { animation-delay: 1s; }
-    img:nth-child(2) { animation-delay: 9s; }
-    img:nth-child(3) { animation-delay: 17s; }
-    img:nth-child(4) { animation-delay: 25s; }
-    img:nth-child(5) { animation-delay: 33s; }
-    img:nth-child(6) { animation-delay: 41s; }
-    img:nth-child(7) { animation-delay: 49s; }
-    img:nth-child(8) { animation-delay: 57s; }
-    img:nth-child(9) { animation-delay: 65s; }
-    img:nth-child(10) { animation-delay: 73s; }
-    img:nth-child(11) { animation-delay: 81s; }
-    img:nth-child(12) { animation-delay: 89s; }
-    img:nth-child(13) { animation-delay: 97s; }
-    img:nth-child(14) { animation-delay: 105s; }
-    img:nth-child(15) { animation-delay: 113s; }
-    img:nth-child(16) { animation-delay: 121s; }
-    img:nth-child(17) { animation-delay: 129s; }
+    img:nth-child(2) { animation-delay: 8s; }
+    img:nth-child(3) { animation-delay: 15s; }
+    img:nth-child(4) { animation-delay: 22s; }
+    img:nth-child(5) { animation-delay: 29s; }
+    img:nth-child(6) { animation-delay: 36s; }
+    img:nth-child(7) { animation-delay: 43s; }
+    img:nth-child(8) { animation-delay: 50s; }
+    img:nth-child(9) { animation-delay: 57s; }
+    img:nth-child(10) { animation-delay: 64s; }
+    img:nth-child(11) { animation-delay: 71s; }
+    img:nth-child(12) { animation-delay: 78s; }
+    img:nth-child(13) { animation-delay: 85s; }
+    img:nth-child(14) { animation-delay: 92s; }
+    img:nth-child(15) { animation-delay: 99s; }
+    img:nth-child(16) { animation-delay: 106s; }
+    img:nth-child(17) { animation-delay: 113s; }
 
   </style>
 </head>
@@ -150,7 +147,7 @@
 
   <!-- Layar Pembuka -->
   <div id="overlay" onclick="mulai()">
-    <h2>Klik untuk Buka Pesan ❤️</h2>
+    <h2>Hallo Sayang, Ada Pesan Untukmu ❤️</h2>
     <button class="btn-buka">BUKA SEKARANG</button>
   </div>
 
@@ -160,7 +157,7 @@
     <h1>💖 Happy Graduation Sayang 💖</h1>
     
     <div class="gallery">
-      <!-- Pastikan file foto ada di folder yang sama di GitHub -->
+      <!-- Upload foto-fotomu ke GitHub dengan nama yang sesuai -->
       <img src="foto1.jpeg" alt="1">
       <img src="foto2.jpeg" alt="2">
       <img src="foto3.jpeg" alt="3">
@@ -180,10 +177,9 @@
       <img src="foto17.jpeg" alt="17">
     </div>
 
-    <div class="footer-container">
-      <p class="footer-text">
-        “Sayang, aku tahu perjalananmu tidak mudah sampai di titik ini. Banyak lelah, air mata, dan perjuangan yang kamu lewati dengan penuh kesabaran. Hari ini, melihatmu berdiri dengan bangga di hari wisuda, hatiku benar-benar terharu. Aku bangga padamu, pada setiap usaha yang tidak pernah kamu sia-siakan. Semoga ilmu yang kamu dapat menjadi berkah dan membawa kebaikan bagi banyak orang. Teruslah menjadi perawat yang penuh kasih, karena hatimu memang diciptakan untuk merawat. Aku akan selalu ada, mendukung setiap langkahmu. Selamat wisuda, cintaku.”
-      </p>
+    <!-- PESAN DI TENGAH -->
+    <div class="pesan-tengah">
+      <p id="typed-text"></p>
       <p class="signature">💖 Jangan berhenti mencintaiku 💖</p>
     </div>
   </div>
@@ -194,11 +190,27 @@
   </audio>
 
   <script>
+    const pesan = "Sayang, aku tahu perjalananmu tidak mudah sampai di titik ini. Banyak lelah, air mata, dan perjuangan yang kamu lewati dengan penuh kesabaran. Hari ini, melihatmu berdiri dengan bangga di hari wisuda, hatiku benar-benar terharu. Aku bangga padamu, pada setiap usaha yang tidak pernah kamu sia-siakan. Semoga ilmu yang kamu dapat menjadi berkah dan membawa kebaikan bagi banyak orang. Teruslah menjadi perawat yang penuh kasih, karena hatimu memang diciptakan untuk merawat. Aku akan selalu ada, mendukung setiap langkahmu. Selamat wisuda, cintaku.";
+
+    function typeWriter(text, i, fnCallback) {
+      if (i < text.length) {
+        document.getElementById("typed-text").innerHTML = text.substring(0, i+1) +'<span aria-hidden="true"></span>';
+        setTimeout(function() {
+          typeWriter(text, i + 1, fnCallback)
+        }, 100);
+      }
+    }
+
     function mulai() {
       document.getElementById("overlay").style.display = "none";
       document.getElementById("mainContent").style.display = "block";
       var lagu = document.getElementById("myLagu");
       lagu.play();
+
+      // Mulai mengetik pesan otomatis setelah slide foto selesai (detik ke-120)
+      setTimeout(function() {
+        typeWriter(pesan, 0);
+      }, 120000); 
     }
   </script>
 
