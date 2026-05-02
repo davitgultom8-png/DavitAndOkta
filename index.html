@@ -1,239 +1,42 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Graduation Sayang</title>
+<script>
+const pesan = "Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.";
 
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+function typeWriter(text, i) {
+  if (i < text.length) {
+    document.getElementById("typed-text").innerHTML =
+      text.substring(0, i+1);
 
-    /* LAYAR PEMBUKA */
-    #overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-color: #ffb6c1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      cursor: pointer;
-      flex-direction: column;
-      text-align: center;
-      color: white;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      transition: opacity 1.5s ease; /* FADE OUT */
-    }
+    setTimeout(() => {
+      typeWriter(text, i+1);
+    }, 50);
 
-    #overlay.fade-out {
-      opacity: 0;
-    }
+  } else {
+    // ✅ JIKA SUDAH SELESAI MENGETIK
+    setTimeout(() => {
+      document.body.innerHTML =
+        "<h2 style='text-align:center;margin-top:50%;color:#d63384;'>Terima kasih sudah membaca ❤️</h2>";
+    }, 4000); // jeda 4 detik setelah selesai
+  }
+}
 
-    .btn-buka {
-      padding: 15px 30px;
-      margin-top: 20px;
-      background: white;
-      color: #ff69b4;
-      border-radius: 50px;
-      font-weight: bold;
-      border: none;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      cursor: pointer;
-    }
+function mulai() {
+  let overlay = document.getElementById("overlay");
 
-    /* BACKGROUND */
-    body {
-      background-image: url("anime-love-bg.jpg"); 
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      font-family: 'Georgia', serif;
-      text-align: center;
-      overflow-x: hidden;
-      min-height: 100vh;
-      color: #d63384;
-    }
+  // fade out
+  overlay.classList.add("fade-out");
 
-    .bg-filter {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(255, 255, 255, 0.5);
-      z-index: -1;
-    }
+  setTimeout(() => {
+    overlay.style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
 
-    .content {
-      display: none;
-      padding: 40px 15px;
-    }
+    let lagu = document.getElementById("myLagu");
+    lagu.play();
 
-    h1 {
-      font-size: 2rem;
-      text-shadow: 2px 2px 5px white;
-      margin-bottom: 20px;
-    }
+    // mulai typing setelah slideshow
+    setTimeout(() => {
+      typeWriter(pesan, 0);
+    }, 120000);
 
-    /* SLIDESHOW */
-    .gallery {
-      position: relative;
-      margin: 20px auto;
-      height: 400px;
-      width: 100%;
-      max-width: 500px;
-    }
-
-    .gallery img {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      max-width: 90%;
-      max-height: 350px;
-      border: 10px solid white;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      opacity: 0;
-      animation: slideShow 7s forwards;
-    }
-
-    /* PESAN */
-    .pesan-tengah {
-      opacity: 0;
-      margin: 40px auto;
-      padding: 25px;
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 25px;
-      max-width: 600px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      animation: fadeIn 3s forwards;
-      animation-delay: 120s;
-      line-height: 1.8;
-      font-size: 1.1rem;
-      border-left: 5px solid #ff69b4;
-    }
-
-    .signature {
-      margin-top: 25px;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
-
-    /* ANIMASI */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideShow {
-      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
-      15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-      85% { opacity: 1; }
-      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
-    }
-
-    /* DELAY FOTO */
-    img:nth-child(1) { animation-delay: 1s; }
-    img:nth-child(2) { animation-delay: 8s; }
-    img:nth-child(3) { animation-delay: 15s; }
-    img:nth-child(4) { animation-delay: 22s; }
-    img:nth-child(5) { animation-delay: 29s; }
-    img:nth-child(6) { animation-delay: 36s; }
-    img:nth-child(7) { animation-delay: 43s; }
-    img:nth-child(8) { animation-delay: 50s; }
-    img:nth-child(9) { animation-delay: 57s; }
-    img:nth-child(10) { animation-delay: 64s; }
-    img:nth-child(11) { animation-delay: 71s; }
-    img:nth-child(12) { animation-delay: 78s; }
-    img:nth-child(13) { animation-delay: 85s; }
-    img:nth-child(14) { animation-delay: 92s; }
-    img:nth-child(15) { animation-delay: 99s; }
-    img:nth-child(16) { animation-delay: 106s; }
-    img:nth-child(17) { animation-delay: 113s; }
-
-  </style>
-</head>
-
-<body>
-
-  <!-- LAYAR PEMBUKA -->
-  <div id="overlay" onclick="mulai()">
-    <h2>Untuk kamu, yang akhirnya sampai di hari wisuda ini ❤️</h2>
-    <p style="margin-top:10px;">Klik untuk pesan spesial dari seseorang yang selalu bangga padamu 💌</p>
-    <button class="btn-buka">BUKA SEKARANG</button>
-  </div>
-
-  <div class="bg-filter"></div>
-
-  <div class="content" id="mainContent">
-    <h1>💖 Happy Graduation Sayang 💖</h1>
-
-    <div class="gallery">
-      <img src="foto1.jpeg">
-      <img src="foto2.jpeg">
-      <img src="foto3.jpeg">
-      <img src="foto4.jpeg">
-      <img src="foto5.jpeg">
-      <img src="foto6.jpeg">
-      <img src="foto7.jpeg">
-      <img src="foto8.jpeg">
-      <img src="foto9.jpeg">
-      <img src="foto10.jpeg">
-      <img src="foto11.jpeg">
-      <img src="foto12.jpeg">
-      <img src="foto13.jpeg">
-      <img src="foto14.jpeg">
-      <img src="foto15.jpeg">
-      <img src="foto16.jpeg">
-      <img src="foto17.jpeg">
-    </div>
-
-    <div class="pesan-tengah">
-      <p id="typed-text"></p>
-      <p class="signature">💖 Jangan berhenti mencintaiku 💖</p>
-    </div>
-  </div>
-
-  <!-- MUSIK -->
-  <audio id="myLagu">
-    <source src="TitiDj-JanganBerhentiMencintaiku.mp3" type="audio/mpeg">
-  </audio>
-
-  <script>
-    const pesan = "Selamat wisuda sayangku... Aku terharu melihatmu sampai di titik ini. Semua perjuanganmu akhirnya terbayarkan. Kamu hebat, kamu kuat, dan kamu luar biasa. Aku bangga punya kamu. Semoga langkahmu ke depan selalu diberkati, dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.";
-
-    function typeWriter(text, i) {
-      if (i < text.length) {
-        document.getElementById("typed-text").innerHTML =
-          text.substring(0, i+1);
-        setTimeout(() => typeWriter(text, i+1), 50);
-      }
-    }
-
-    function mulai() {
-      let overlay = document.getElementById("overlay");
-
-      // fade out
-      overlay.classList.add("fade-out");
-
-      setTimeout(() => {
-        overlay.style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-
-        let lagu = document.getElementById("myLagu");
-        lagu.play();
-
-        // mulai typing setelah slideshow
-        setTimeout(() => {
-          typeWriter(pesan, 0);
-        }, 120000);
-
-        // AUTO CLOSE SAAT LAGU SELESAI
-        lagu.onended = function() {
-          document.body.innerHTML = "<h2 style='text-align:center;margin-top:50%;color:#d63384;'>Terima kasih sudah membaca ❤️</h2>";
-        };
-
-      }, 1500); // sesuai durasi fade
-    }
-  </script>
-
-</body>
-</html>
+  }, 1500);
+}
+</script>
