@@ -20,6 +20,7 @@
       text-align: center;
       color: white;
       font-family: Arial, sans-serif;
+      padding: 20px;
     }
 
     .btn-buka {
@@ -34,7 +35,7 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
-    /* BACKGROUND & LAYOUT */
+    /* BACKGROUND UTAMA */
     body {
       background-image: url("anime-love-bg.jpg"); 
       background-size: cover;
@@ -42,6 +43,7 @@
       background-attachment: fixed;
       font-family: 'Georgia', serif;
       height: 100vh;
+      width: 100vw;
       overflow: hidden; 
       display: flex;
       justify-content: center;
@@ -62,15 +64,15 @@
       position: relative;
     }
 
-    /* GALERI FOTO TENGAH */
+    /* PERBAIKAN UKURAN FOTO AGAR TIDAK TERLALU BESAR */
     .gallery {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 85%;
-      max-width: 450px;
-      height: 450px;
+      width: 80%; /* Ukuran container lebih kecil agar cantik */
+      max-width: 350px; /* Maksimal lebar di laptop/HP besar */
+      height: 350px;
     }
 
     .gallery img {
@@ -78,48 +80,49 @@
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      border: 10px solid white;
+      object-fit: contain; /* FOTO TIDAK TERPOTONG (Proporsional) */
+      background-color: rgba(255, 255, 255, 0.5); /* Background tipis jika foto tidak kotak */
+      border: 6px solid white;
       border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
       opacity: 0;
       animation: slideShow 12s forwards; 
     }
 
-    /* KOTAK PESAN KHUSUS OKTAVIA */
+    /* KOTAK PESAN */
     #container-pesan {
       display: none; 
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 90%;
-      max-width: 550px;
+      width: 85%;
+      max-width: 500px;
       background: rgba(255, 255, 255, 0.95);
-      padding: 35px 25px;
+      padding: 30px 20px;
       border-radius: 20px;
-      box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
       text-align: center;
       color: #d63384;
       border-top: 5px solid #ff69b4;
     }
 
     .footer-text {
-      font-size: 1.15rem;
-      line-height: 1.8;
+      font-size: 1rem;
+      line-height: 1.6;
       margin-bottom: 20px;
       font-style: italic;
     }
 
     /* ANIMASI SLIDESHOW */
     @keyframes slideShow {
-      0% { opacity: 0; transform: scale(0.9); }
+      0% { opacity: 0; transform: scale(0.95); }
       10% { opacity: 1; transform: scale(1); }
       90% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 0; transform: scale(0.95); }
     }
 
-    /* Delay 17 Foto (Total durasi 204 detik) */
+    /* Delay Sinkron Lagu (Total 204 Detik) */
     img:nth-child(1) { animation-delay: 0s; }
     img:nth-child(2) { animation-delay: 12s; }
     img:nth-child(3) { animation-delay: 24s; }
@@ -172,7 +175,7 @@
 
     <div id="container-pesan">
       <p class="footer-text" id="typed-text"></p>
-      <p style="font-weight:bold; font-size: 1.2rem;">💖 Jangan berhenti mencintaiku 💖</p>
+      <p style="font-weight:bold; font-size: 1.1rem;">💖 Jangan berhenti mencintaiku 💖</p>
     </div>
   </div>
 
@@ -181,18 +184,16 @@
   </audio>
 
   <script>
-    // Pesan yang Anda berikan
-    const pesanFinal = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
+    const pesanOktavia = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
 
     function typeWriter(text, i, fnCallback) {
       if (i < text.length) {
         document.getElementById("typed-text").innerHTML = text.substring(0, i+1);
         setTimeout(function() {
           typeWriter(text, i + 1, fnCallback)
-        }, 100); 
+        }, 90); 
       } else {
-        // Setelah selesai mengetik, tunggu sebentar lalu close/pindah halaman
-        setTimeout(fnCallback, 20000); 
+        setTimeout(fnCallback, 15000); // Pesan tampil 15 detik sebelum close
       }
     }
 
@@ -202,18 +203,18 @@
       const lagu = document.getElementById("myLagu");
       lagu.play();
 
-      // Durasi slideshow 17 foto x 12 detik = 204 detik
+      // Foto selesai di detik 204
       setTimeout(function() {
         document.getElementById("galeriFoto").style.display = "none";
         document.getElementById("container-pesan").style.display = "block";
         
-        typeWriter(pesanFinal, 0, function() {
-          // Auto Close (Pindah ke Google) setelah lagu/pesan selesai
+        typeWriter(pesanOktavia, 0, function() {
+          // Auto Close (Pindah ke Google)
           window.location.href = "https://www.google.com";
         });
       }, 204000); 
 
-      // Safety Auto Close pada detik ke-270 (akhir lagu)
+      // Safety Close tepat saat lagu berakhir (detik 270)
       setTimeout(function() {
          window.location.href = "https://www.google.com";
       }, 270000);
