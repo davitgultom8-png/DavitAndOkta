@@ -9,6 +9,9 @@
 
         body {
             background-color: #ffe4e1;
+            background-image: url("anime-love-bg.jpg");
+            background-size: cover;
+            background-position: center;
             font-family: 'Arial', sans-serif;
             overflow: hidden;
             display: flex;
@@ -17,7 +20,6 @@
             height: 100vh;
         }
 
-        /* LAYAR AWAL */
         #layar-awal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -28,7 +30,7 @@
             align-items: center;
             z-index: 9999;
             color: white;
-            text-align: center;
+            padding: 20px;
         }
 
         .tombol {
@@ -40,40 +42,41 @@
             border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 1.1rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        /* FRAME FOTO (UKURAN RAPI & TETAP) */
-        .container {
+        /* FRAME FOTO YANG FLEKSIBEL & RAPI */
+        .photo-container {
             display: none;
             position: relative;
-            width: 300px; /* Ukuran lebar dikunci agar tidak besar */
-            height: 400px;
+            max-width: 90%; /* Supaya tidak luber di HP */
+            max-height: 70vh; /* Supaya tidak kepotong bawahnya */
             background: white;
-            padding: 15px 15px 60px 15px; /* Memberi jarak bawah seperti Polaroid */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border-radius: 4px;
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            text-align: center;
         }
 
-        .container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* FOTO DIJAMIN TIDAK TERPOTONG / PECAH */
+        .photo-container img {
+            max-width: 100%;
+            max-height: 60vh;
             display: none;
-            border: 1px solid #eee;
+            border-radius: 4px;
+            object-fit: contain;
         }
 
         /* KOTAK PESAN */
         #kotak-pesan {
             display: none;
-            width: 90%;
-            max-width: 400px;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
+            width: 85%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 2px solid #ffb6c1;
         }
 
         #teks-jalan {
@@ -81,10 +84,10 @@
             font-size: 1.1rem;
             line-height: 1.6;
             font-style: italic;
+            min-height: 100px;
         }
 
-        /* ANIMASI */
-        .fade-in { animation: fadeIn 1s ease-in forwards; }
+        .fade-in { animation: fadeIn 0.8s ease-in forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     </style>
@@ -92,11 +95,12 @@
 <body>
 
     <div id="layar-awal">
-        <h1>Untuk Oktavia Sidauruk ❤️</h1>
-        <button class="tombol" onclick="mulaiKejutan()">Buka Sekarang</button>
+        <h1 style="text-align:center;">Klik untuk Oktavia Sidauruk ❤️</h1>
+        <button class="tombol" onclick="mulai()">BUKA SEKARANG</button>
     </div>
 
-    <div class="container" id="frame-foto">
+    <div class="photo-container" id="frame">
+        <!-- Foto 1 sampai 17 -->
         <img src="foto1.jpeg" class="slides">
         <img src="foto2.jpeg" class="slides">
         <img src="foto3.jpeg" class="slides">
@@ -114,72 +118,71 @@
         <img src="foto15.jpeg" class="slides">
         <img src="foto16.jpeg" class="slides">
         <img src="foto17.jpeg" class="slides">
+        
+        <!-- Tulisan kecil di bawah foto -->
+        <p style="margin-top: 10px; color: #ff69b4; font-size: 0.8rem;">Happy Graduation Sayang ❤️</p>
     </div>
 
     <div id="kotak-pesan">
         <p id="teks-jalan"></p>
-        <p style="margin-top:20px; font-weight:bold; color:#ff69b4;">❤️ Happy Graduation ❤️</p>
+        <p style="margin-top:20px; font-weight:bold; color:#ff69b4;">💖 Love You 💖</p>
     </div>
 
-    <audio id="musik" src="TitiDj-JanganBerhentiMencintaiku.mp3"></audio>
+    <audio id="lagu" src="TitiDj-JanganBerhentiMencintaiku.mp3"></audio>
 
     <script>
-        const pesan = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
-        let indexFoto = 0;
-        const slides = document.getElementsByClassName("slides");
+        const kataKata = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
+        let currentIndex = 0;
+        const slides = document.querySelectorAll(".slides");
 
-        function mulaiKejutan() {
+        function mulai() {
             document.getElementById("layar-awal").style.display = "none";
-            document.getElementById("frame-foto").style.display = "block";
-            document.getElementById("musik").play();
-            tampilkanSlides();
+            document.getElementById("frame").style.display = "block";
+            document.getElementById("lagu").play();
+            showSlides();
         }
 
-        function tampilkanSlides() {
-            if (indexFoto < slides.length) {
-                // Sembunyikan foto sebelumnya
-                for (let i = 0; i < slides.length; i++) {
-                    slides[i].style.display = "none";
-                }
-                // Tampilkan foto sekarang
-                slides[indexFoto].style.display = "block";
-                slides[indexFoto].classList.add("fade-in");
-                indexFoto++;
+        function showSlides() {
+            if (currentIndex < slides.length) {
+                // Reset semua slide
+                slides.forEach(s => s.style.display = "none");
                 
-                // Ganti foto setiap 12 detik agar pas dengan lagu (total 17 foto)
-                setTimeout(tampilkanSlides, 12000);
+                // Tampilkan yang sekarang
+                slides[currentIndex].style.display = "block";
+                slides[currentIndex].classList.add("fade-in");
+                
+                currentIndex++;
+                setTimeout(showSlides, 10000); // Ganti tiap 10 detik
             } else {
-                // Selesai semua foto, tampilkan pesan teks
-                document.getElementById("frame-foto").style.display = "none";
+                // Selesai foto, muncul pesan
+                document.getElementById("frame").style.display = "none";
                 document.getElementById("kotak-pesan").style.display = "block";
-                ketikPesan();
+                mulaiNgetik();
             }
         }
 
-        function ketikPesan() {
+        function mulaiNgetik() {
             let i = 0;
             const target = document.getElementById("teks-jalan");
             function ketik() {
-                if (i < pesan.length) {
-                    target.innerHTML += pesan.charAt(i);
+                if (i < kataKata.length) {
+                    target.innerHTML += kataKata.charAt(i);
                     i++;
-                    setTimeout(ketik, 80);
+                    setTimeout(ketik, 70);
                 } else {
-                    // Setelah teks selesai, tunggu 15 detik lalu auto-close
-                    setTimeout(tutupWeb, 15000);
+                    // Setelah beres ngetik, tunggu 15 detik lalu pindah ke Google
+                    setTimeout(() => {
+                        window.location.href = "https://www.google.com";
+                    }, 15000);
                 }
             }
             ketik();
         }
 
-        function tutupWeb() {
-            // Karena browser modern memblokir window.close(), kita arahkan ke Google
+        // Safety Close (setelah 4.5 menit)
+        setTimeout(() => {
             window.location.href = "https://www.google.com";
-        }
-
-        // Safety Timer: Jika lagu habis (270 detik), web otomatis close
-        setTimeout(tutupWeb, 270000);
-
+        }, 270000);
     </script>
 </body>
 </html>
