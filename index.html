@@ -8,7 +8,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            /* Background diatur agar tetap terlihat dan pas di HP */
             background-image: url("anime-love-bg.jpg");
             background-size: cover;
             background-position: center;
@@ -22,11 +21,10 @@
             overflow: hidden;
         }
 
-        /* Overlay Awal */
         #layar-awal {
             position: fixed;
             inset: 0;
-            background: rgba(255, 182, 193, 0.9); /* Dibuat sedikit transparan */
+            background: rgba(255, 182, 193, 0.9);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -48,17 +46,16 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        /* FRAME FOTO: Transparan dan Rapi */
         .wrapper {
             display: none;
-            width: 80%; /* Tidak menutupi seluruh lebar HP */
+            width: 80%; 
             max-width: 280px;
-            background: rgba(255, 255, 255, 0.85); /* Putih transparan agar background terlihat */
-            padding: 10px 10px 30px 10px;
+            background: rgba(255, 255, 255, 0.85); 
+            padding: 10px 10px 35px 10px;
             border-radius: 8px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             text-align: center;
-            backdrop-filter: blur(5px); /* Efek blur pada background di belakang foto */
+            backdrop-filter: blur(5px);
         }
 
         .wrapper img {
@@ -70,13 +67,12 @@
             border-radius: 4px;
         }
 
-        /* KOTAK PESAN */
         #kotak-pesan {
             display: none;
             width: 85%;
-            max-width: 350px;
-            background: rgba(255, 255, 255, 0.9); /* Transparan */
-            padding: 20px;
+            max-width: 380px;
+            background: rgba(255, 255, 255, 0.9); 
+            padding: 25px;
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -87,7 +83,6 @@
             color: #d63384;
             font-size: 1rem;
             line-height: 1.5;
-            font-weight: 500;
         }
 
         .fade { animation: fadeEffect 0.8s; }
@@ -119,11 +114,14 @@
         <img src="foto15.jpeg" class="slide">
         <img src="foto16.jpeg" class="slide">
         <img src="foto17.jpeg" class="slide">
-        <p style="margin-top:10px; color: #ff69b4; font-size: 0.8rem; font-weight: bold;">Graduation Day ✨</p>
+        <!-- TEKS DI BAWAH FOTO SUDAH DIPERBAIKI -->
+        <p style="margin-top:15px; color: #ff69b4; font-size: 0.9rem; font-weight: bold;">Happy Graduation Sayang ❤️</p>
     </div>
 
     <div id="kotak-pesan">
         <p id="teks-jalan"></p>
+        <!-- TEKS DI BAWAH PESAN JALAN SUDAH DIPERBAIKI -->
+        <p style="margin-top:20px; font-weight:bold; color:#ff69b4;">Love You 💖</p>
     </div>
 
     <audio id="musik" src="TitiDj-JanganBerhentiMencintaiku.mp3"></audio>
