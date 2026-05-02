@@ -19,12 +19,14 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            background-color: #ffe4e1;
         }
 
+        /* LAYAR AWAL */
         #layar-awal {
             position: fixed;
             inset: 0;
-            background: rgba(255, 182, 193, 0.9);
+            background: rgba(255, 182, 193, 0.95);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -35,7 +37,7 @@
         }
 
         .tombol {
-            padding: 12px 35px;
+            padding: 15px 40px;
             margin-top: 20px;
             background: white;
             color: #ff69b4;
@@ -44,56 +46,72 @@
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 1rem;
         }
 
+        /* FRAME POLAROID MODERN */
         .wrapper {
             display: none;
-            width: 80%; 
-            max-width: 280px;
-            background: rgba(255, 255, 255, 0.85); 
-            padding: 10px 10px 35px 10px;
-            border-radius: 8px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            width: 85%; 
+            max-width: 300px;
+            background: white; 
+            padding: 12px 12px 50px 12px;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             text-align: center;
-            backdrop-filter: blur(5px);
+            position: relative;
         }
 
         .wrapper img {
             width: 100%;
-            height: auto;
-            max-height: 350px;
-            object-fit: contain;
+            height: 380px; /* Tinggi foto dibuat pas di layar HP */
+            object-fit: cover; /* Agar foto penuh memenuhi frame */
             display: none;
-            border-radius: 4px;
+            border-radius: 2px;
         }
 
+        /* TEKS DI BAWAH FOTO */
+        .caption-foto {
+            position: absolute;
+            bottom: 15px;
+            width: 100%;
+            left: 0;
+            color: #ff69b4;
+            font-size: 0.95rem;
+            font-weight: bold;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        /* KOTAK PESAN TRANSPARAN (ESTETIK) */
         #kotak-pesan {
             display: none;
             width: 85%;
-            max-width: 380px;
+            max-width: 400px;
             background: rgba(255, 255, 255, 0.9); 
-            padding: 25px;
-            border-radius: 15px;
+            padding: 30px 20px;
+            border-radius: 20px;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            border: 2px solid #ffb6c1;
         }
 
         #teks-jalan {
             color: #d63384;
-            font-size: 1rem;
-            line-height: 1.5;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            font-style: italic;
         }
 
-        .fade { animation: fadeEffect 0.8s; }
+        .fade { animation: fadeEffect 1s ease; }
         @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }
     </style>
 </head>
 <body>
 
     <div id="layar-awal">
-        <h2 style="padding: 0 20px;">Klik untuk Oktavia Sidauruk ❤️</h2>
-        <button class="tombol" onclick="mulai()">BUKA</button>
+        <h2 style="padding: 0 30px;">Special Gift for<br>Oktavia Sidauruk ❤️</h2>
+        <button class="tombol" onclick="mulai()">Klik Disini</button>
     </div>
 
     <div class="wrapper" id="frame">
@@ -114,20 +132,19 @@
         <img src="foto15.jpeg" class="slide">
         <img src="foto16.jpeg" class="slide">
         <img src="foto17.jpeg" class="slide">
-        <!-- TEKS DI BAWAH FOTO SUDAH DIPERBAIKI -->
-        <p style="margin-top:15px; color: #ff69b4; font-size: 0.9rem; font-weight: bold;">Happy Graduation Sayang ❤️</p>
+        
+        <p class="caption-foto">Happy Graduation Sayang ❤️</p>
     </div>
 
     <div id="kotak-pesan">
         <p id="teks-jalan"></p>
-        <!-- TEKS DI BAWAH PESAN JALAN SUDAH DIPERBAIKI -->
-        <p style="margin-top:20px; font-weight:bold; color:#ff69b4;">Love You 💖</p>
+        <p style="margin-top:25px; font-weight:bold; color:#ff69b4; font-size: 1.2rem;">Love You 💖</p>
     </div>
 
     <audio id="musik" src="TitiDj-JanganBerhentiMencintaiku.mp3"></audio>
 
     <script>
-        const pesan = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
+        const pesanCinta = "“Selamat wisuda sayang ku cintaku aku terharu melihatmu sampai di titik ini semua perjuanganmu akhirnya terbayarkan Oktavia hebat Oktavia kuat dan Oktavia luar biasa Terima kasih sudah tidak pernah menyerah aku bangga punya Oktavia sidauruk ini semoga langkahmu ke depan selalu diberkati dan aku berharap bisa terus menemanimu dalam setiap perjalanan hidupmu.”";
         let n = 0;
         const slides = document.querySelectorAll(".slide");
 
@@ -144,30 +161,36 @@
                 slides[n].style.display = "block";
                 slides[n].classList.add("fade");
                 n++;
-                setTimeout(tampilFoto, 10000); 
+                setTimeout(tampilFoto, 10000); // 10 detik per foto agar tidak terlalu cepat
             } else {
                 document.getElementById("frame").style.display = "none";
                 document.getElementById("kotak-pesan").style.display = "block";
-                ketik();
+                mulaiMengetik();
             }
         }
 
-        let i = 0;
-        function ketik() {
-            if (i < pesan.length) {
-                document.getElementById("teks-jalan").innerHTML += pesan.charAt(i);
-                i++;
-                setTimeout(ketik, 80);
-            } else {
-                setTimeout(tutup, 15000);
+        function mulaiMengetik() {
+            let i = 0;
+            const target = document.getElementById("teks-jalan");
+            function ketik() {
+                if (i < pesanCinta.length) {
+                    target.innerHTML += pesanCinta.charAt(i);
+                    i++;
+                    setTimeout(ketik, 70);
+                } else {
+                    // Tunggu sebentar lalu pindah ke Google
+                    setTimeout(tutupOtomatis, 15000);
+                }
             }
+            ketik();
         }
 
-        function tutup() {
+        function tutupOtomatis() {
             window.location.href = "https://www.google.com";
         }
 
-        setTimeout(tutup, 270000);
+        // Timer darurat jika lagu habis
+        setTimeout(tutupOtomatis, 270000);
     </script>
 </body>
 </html>
